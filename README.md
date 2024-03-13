@@ -1,53 +1,47 @@
-# E2Pose: Fully Convolutional Networks for End-to-End Multi-Person Pose Estimation
+##E2Pose for Tennis: Fully Convolutional Networks for End-to-End Tennis Player Pose Estimation
+===================================================================================================
 
-## Abstract
-Highly accurate multi-person pose estimation at a high framerate is a fundamental problem in autonomous driving. Solving the problem could aid in preventing pedestrian-car accidents. The present study tackles this problem by proposing a new model composed of a feature pyramid and an original head to a general backbone. The original head is built using lightweight CNNs and directly estimates multi-person pose coordinates. This configuration avoids the complex post-processing and two-stage estimation adopted by other models and allows for a lightweight model. Our model can be trained end-to-end and performed in real-time on a resource-limited platform (low-cost edge device) during inference. Experimental results using the COCO and CrowdPose datasets showed that our model can achieve a higher framerate (approx. 20 frames/sec with NVIDIA Jetson AGX Xavier) than other state-of-the-art models while maintaining sufficient accuracy for practical use.
+#Introduction
+------------
 
-## Demo on Google Colab
-[demo_inference.ipynb](http://colab.research.google.com/github/AISIN-TRC/E2Pose/blob/main/demo_inference.ipynb)
+This project adapts the E2Pose model, originally proposed for multi-person pose estimation in autonomous driving, to the domain of tennis player pose estimation. The adapted model leverages the feature pyramid and original head architecture of E2Pose, which allows for a lightweight model that can be trained end-to-end and performed in real-time on a resource-limited platform during inference.
 
-## Download pre-train models
-```bash
-./pretrains/download.sh
-```
+The primary goal of this project is to accurately estimate the position of tennis players on the court using a single camera placed behind the court. The model processes the video feed frame-by-frame, detects the players' positions, and outputs the coordinates of both feet for each player in each frame.
 
-## Inference E2Pose's demo on localhost
-```bash
-#inference video
-./inference.sh --src './sample/$YOUR_MOVIE.mp4'
-#inference image
-./inference.sh --src './sample/$YOUR_IMAGE.jpg'
-```
+#Usage
+-----
 
-## Convert to TensorRT model (Running on Jetson devices takes a very long time)
-```bash
-./generate_trtmodel.sh
-```
-### (Reference) Time required for conversion @ Jetson AGX Xavier
-    ResNet101/512x512 : tf2onnx = 108 minutes, onnx2trt = 20 minutes
+1. Set up the environment and install the necessary dependencies as described in the original E2Pose repository.
 
-# Benchmark code for comparing framerates
-## OpenPifPaf: Composite Fields for Semantic Keypoint Detection and Spatio-Temporal Association [[arxiv](https://arxiv.org/abs/2103.02440)][[github](https://github.com/openpifpaf/openpifpaf)]
-### Inference openPifPaf's demo on localhost
-```bash
-#inference video
-./inference_pifpaf.sh --src './sample/$YOUR_MOVIE.mp4'
-#inference image
-./inference_pifpaf.sh --src './sample/$YOUR_IMAGE.jpg'
-```
-## OpenMMLab: Pose Estimation Toolbox and Benchmark [[github](https://github.com/open-mmlab/mmpose)]
-### inference mmpose's demo on localhsot
-```bash
-#inference video
-./inference_mmpose.sh --src './smaple/$YOUR_MOVIE.mp4'
-#inference image
-./inference_mmpose.sh --src './sample/$YOUR_IMAGE.jpg'
-```
+2. Run the `inference_footprint.py` script with the following command:
 
-# Citation
-Masakazu Tobeta, Yoshihide Sawada, Ze Zheng, Sawa Takamuku, Naotake Natori. "[E2Pose: Fully Convolutional Networks for End-to-End Multi-Person Pose Estimation](https://ieeexplore.ieee.org/document/9981322)". 2022 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS).
+    ```
+    python inference_footprint.py --input_video /path/to/your/video.mp4 --output_csv /path/to/output/footprints.csv
+    ```
 
-戸部田雅一，鄭澤，高椋佐和，澤田好秀， "[高精度及び高フレームレートなEnd‐to‐End多人数姿勢推定](https://www.aisin.com/jp/technology/technicalreview/27/pdf/08.pdf)"．アイシン技報2023．
+    Replace `/path/to/your/video.mp4` with the path to your input video file and `/path/to/output/footprints.csv` with the desired path for the output CSV file.
 
-# Commercial License
-The open source license is in the [LICENSE](./LICENSE) file. This software is also available for licensing via the AISIN Corp. (https://www.aisin.com/).
+3. When the script starts, a window will display the first frame of the video. Manually select the outer boundaries of the tennis court by clicking on the four corners of the court in a clockwise or counterclockwise order. Press 'Enter' to confirm the selection.
+
+4. The script will then process the video frame-by-frame, detecting the positions of the players' feet. The output will be saved in the specified CSV file, with each row containing the following information:
+   - Frame number
+   - Timestamp
+   - Player 1 left foot X coordinate
+   - Player 1 left foot Y coordinate
+   - Player 1 right foot X coordinate
+   - Player 1 right foot Y coordinate
+   - Player 2 left foot X coordinate
+   - Player 2 left foot Y coordinate
+   - Player 2 right foot X coordinate
+   - Player 2 right foot Y coordinate
+
+#Citation
+========
+
+This code is based on the work of Masakazu Tobeta, Yoshihide Sawada, Ze Zheng, Sawa Takamuku, Naotake Natori. "E2Pose: Fully Convolutional Networks for End-to-End Multi-Person Pose Estimation". 2022 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS).
+
+
+#Acknowledgements
+================
+
+We would like to express our gratitude to the authors of E2Pose for making their code available and for their groundbreaking work in the field of multi-person pose estimation. Their work has served as a valuable foundation for our adaptation of the model to the domain of tennis player pose estimation.
