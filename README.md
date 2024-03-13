@@ -1,14 +1,14 @@
-##E2Pose for Tennis: Fully Convolutional Networks for End-to-End Tennis Player Pose Estimation
+E2Pose for Tennis: Fully Convolutional Networks for End-to-End Tennis Player Pose Estimation
 ===================================================================================================
 
-#Introduction
+Introduction
 ------------
 
 This project adapts the E2Pose model, originally proposed for multi-person pose estimation in autonomous driving, to the domain of tennis player pose estimation. The adapted model leverages the feature pyramid and original head architecture of E2Pose, which allows for a lightweight model that can be trained end-to-end and performed in real-time on a resource-limited platform during inference.
 
 The primary goal of this project is to accurately estimate the position of tennis players on the court using a single camera placed behind the court. The model processes the video feed frame-by-frame, detects the players' positions, and outputs the coordinates of both feet for each player in each frame.
 
-#Usage
+Usage
 -----
 
 1. Set up the environment and install the necessary dependencies as described in the original E2Pose repository.
@@ -35,7 +35,7 @@ The primary goal of this project is to accurately estimate the position of tenni
    - Player 2 right foot X coordinate
    - Player 2 right foot Y coordinate
 
-#Citation
+Citation
 ========
 
 This code is based on the work of Masakazu Tobeta, Yoshihide Sawada, Ze Zheng, Sawa Takamuku, Naotake Natori. "E2Pose: Fully Convolutional Networks for End-to-End Multi-Person Pose Estimation". 2022 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS).
