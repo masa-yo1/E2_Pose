@@ -34,6 +34,12 @@ Usage
    - Player 2 left foot Y coordinate
    - Player 2 right foot X coordinate
    - Player 2 right foot Y coordinate
+  
+
+
+![Videotogif](https://github.com/masa-yo1/E2_Pose/assets/102569005/98282069-fce2-4019-8d69-16af17392759)
+![movie12_footprint_AdobeExpress](https://github.com/masa-yo1/E2_Pose/assets/102569005/eaf40bb3-248f-4a76-97c9-4f02202c9709)
+
 
 Citation
 ========
